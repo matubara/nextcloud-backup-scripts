@@ -1,5 +1,5 @@
 #pushd /home/users/2/main.jp-onlinestore/web/storage2022.sinceretechnology.com.au/sh
-pushd /home/users/2/main.jp-blogdeoshiete/web/storage2022.sinceretechnology.biz/sh-blogdeoshiete
+pushd /home/users/2/main.jp-blogdeoshiete/web/storage2022.sinceretechnology.net.au/sh
 
 #!/bin/bash
 source ./nc_const.sh
