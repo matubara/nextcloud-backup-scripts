@@ -8,6 +8,7 @@ pushd ${DOCUMENTROOT_PATH}sh
 #!/bin/bash
 source ./nc_const.sh
 
+fileformat="zip"
 
 #Start date
 _started_at=$(date +'%s.%3N')
@@ -22,23 +23,23 @@ echo ${SYSDATE}': Start backup for NEXTCLOUD'
 bash ./nc_backup_database.sh ${SYSDATE}
 
 #フォルダのバックアップを取得する
-bash ./nc_backup_folder.sh ${SYSDATE} config nextcloud/config
-bash ./nc_backup_folder.sh ${SYSDATE} nextcloud nextcloud
-bash ./nc_backup_folder.sh ${SYSDATE} data data
+bash ./nc_backup_folder-zip.sh ${SYSDATE} config nextcloud/config
+bash ./nc_backup_folder-zip.sh ${SYSDATE} nextcloud nextcloud
+bash ./nc_backup_folder-zip.sh ${SYSDATE} data data
 
 #Maintenance mode OFF
 #${PHP_CMD} ${NEXTCLOUD_DIR}occ maintenance:mode --off
 #echo 'Maintenance mode is turned off'
 
 #バックアップサーバーでデータを転送する
-echo "./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_config.tar ${SYSDATE}_config.tar"
-./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_config.tar ${SYSDATE}_config.tar
+echo "./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_config.${zip} ${SYSDATE}_config.${zip}"
+./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_config.${zip} ${SYSDATE}_config.${zip}
 sleep 1.5 
-./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_nextcloud.tar ${SYSDATE}_nextcloud.tar
+./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_nextcloud.${zip} ${SYSDATE}_nextcloud.${zip}
 sleep 1.5 
 ./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_nextcloud_db.sql ${SYSDATE}_nextcloud_db.sql
 sleep 1.5 
-./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_data.tar ${SYSDATE}_data.tar
+./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_data.${zip} ${SYSDATE}_data.${zip}
 
 #date info
 echo $SYSDATE > ${BACKUP_DIR}latestfile.txt
