@@ -26,8 +26,8 @@ SYSDATE=`cat ${BACKUPDIR}latestfile.txt`_
 echo "backup date=${SYSDATE}"
 
 #FILES
-tar -xf ${BACKUPDIR}${SYSDATE}nextcloud.tar
-tar -xf ${BACKUPDIR}${SYSDATE}data.tar
+tar xfmp ${BACKUPDIR}${SYSDATE}nextcloud.tar
+tar xfmp ${BACKUPDIR}${SYSDATE}data.tar
 cp -rp ${SRCBACKUPDIR}nextcloud ${BASEDIR}
 cp -rp ${SRCBACKUPDIR}data ${BASEDIR}
 cp -p ${BASEDIR}config.php ${BASEDIR}nextcloud/config
