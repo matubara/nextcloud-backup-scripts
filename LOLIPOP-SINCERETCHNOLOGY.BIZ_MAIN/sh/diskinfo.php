@@ -2,6 +2,8 @@
 //<link rel="stylesheet" type="text/css" href="/home/c9432556/public_html/sinceretechnology.com.au/table.css"> 
 function dir_size($dir)
 {
+  //2022.12.18 ADD HM
+  $mas=0;
   $handle = opendir($dir);
   while ($file = readdir($handle)) {
     if ($file != '..' && $file != '.' && !is_dir($dir.'/'.$file)) {
