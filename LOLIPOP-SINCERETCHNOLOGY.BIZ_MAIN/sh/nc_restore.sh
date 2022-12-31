@@ -53,8 +53,10 @@ rm -rf .${DOCUMENTROOT_IN_BACKUPFILE}data
 #config file
 cp -p ${DOCUMENTROOT_PATH}config.php ${DOCUMENTROOT_PATH}nextcloud/config 
 
+echo "RESTORE DATABASE"
 read -p "Press [Enter] key to move on to the next."
 #DATABASE
 mysql -u LAA1467345 -pmelb1999 -h mysql207.phy.lolipop.lan LAA1467345-storage2022 < ${BACKUPDIR}${SYSDATE}nextcloud_db.sql
 #MAINTENANCE MODE OFF
 #/usr/local/php/7.4/bin/php  /home/users/2/main.jp-blogdeoshiete/web/docs.sinceretechnology.biz/nextcloud/occ maintenance:mode --off
+echo "COMPLETED"

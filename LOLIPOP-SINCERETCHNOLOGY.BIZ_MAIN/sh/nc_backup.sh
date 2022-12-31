@@ -18,6 +18,7 @@ echo ${SYSDATE}': Start backup for NEXTCLOUD'
 #${PHP_CMD} ${NEXTCLOUD_DIR}occ maintenance:mode --on
 #echo 'Maintenance mode is turned on'
 
+
 #データベースのバックアップを取得する
 bash ./nc_backup_database.sh ${SYSDATE}
 
@@ -51,7 +52,7 @@ sleep 1.5
 
 #Send compelte mail
 echo 'Send Complete mail'
-${PHP_CMD} ./diskinfo.php ${TARGET_DIR} admin@sinceretechnology.com.au
+${PHP_CMD} ./diskinfo.php ${DOCUMENTROOT_PATH} storage2022.sinceretechnology.biz admin@sinceretechnology.com.au
 echo ${SYSDATE}': Completed all backup'
 
 # End time
