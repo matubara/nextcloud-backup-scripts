@@ -1,11 +1,11 @@
-
+#!/bin/bash
 #パスの設定
 DOCUMENTROOT_PATH=/home/users/2/main.jp-blogdeoshiete/web/storage2022.sinceretechnology.biz/
 
 #ドキュメントルートにデフォルトフォルダを移動
 pushd ${DOCUMENTROOT_PATH}sh
 
-#!/bin/bash
+
 source ./nc_const.sh
 
 
@@ -14,10 +14,10 @@ _started_at=$(date +'%s.%3N')
 
 SYSDATE=`date '+%Y%m%d_%H%M%S'`
 echo ${SYSDATE}': Start backup for NEXTCLOUD'
-#Maintenance mode ON
-#${PHP_CMD} ${NEXTCLOUD_DIR}occ maintenance:mode --on
-#echo 'Maintenance mode is turned on'
 
+#Maintenance mode ON
+${PHP_CMD} ${NEXTCLOUD_DIR}occ maintenance:mode --on
+echo 'Maintenance mode is turned on'
 
 #データベースのバックアップを取得する
 bash ./nc_backup_database.sh ${SYSDATE}
@@ -27,9 +27,12 @@ bash ./nc_backup_folder.sh ${SYSDATE} config nextcloud/config
 bash ./nc_backup_folder.sh ${SYSDATE} nextcloud nextcloud
 bash ./nc_backup_folder.sh ${SYSDATE} data data
 
+sleep 3
+
 #Maintenance mode OFF
-#${PHP_CMD} ${NEXTCLOUD_DIR}occ maintenance:mode --off
-#echo 'Maintenance mode is turned off'
+${PHP_CMD} ${NEXTCLOUD_DIR}occ maintenance:mode --off
+echo 'Maintenance mode is turned off'
+
 
 #バックアップサーバーでデータを転送する
 echo "./scp-transfer-lib.sh ${BACKUP_DIR}${SYSDATE}_config.tar ${SYSDATE}_config.tar"
